@@ -29,21 +29,21 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
-  save: "Save"
+jp:
+  save: "保存"
   activerecord:
     models:
-      book: "Book"
+      book: "本"
     attributes:
       book:
-        title: "Title"
-        memo: "Memo"
-        author: "Author"
-        picture: "Picture"
-        destroy_button: "Destroy this book"
-        edit_button: "Edit this book"
-        new_button: "New book"
-        show_button: "Show this book"
-        back_to_list_button: "Back to books"
-        editing_page_title: "Editing book"
-        new_page_title: "New book"
+        title: "タイトル"
+        memo: "メモ"
+        author: "著者"
+        picture: "書影"
+        destroy_button: "本を削除"
+        edit_button: "本を編集"
+        new_button: "本を追加"
+        show_button: "本の詳細"
+        back_to_list_button: "一覧に戻る"
+        editing_page_title: "本の編集"
+        new_page_title: "本の追加"

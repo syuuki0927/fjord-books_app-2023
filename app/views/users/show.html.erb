@@ -1,0 +1,27 @@
+メールアドレス : <%= @user.email %> <br>
+郵便番号 : <%= @user.postal_code %><br>
+住所 : <%= @user.address %><br>
+自己紹介 : <%= @user.bio %>
+
+<table class="table_design_horizontal">
+    <tbody>
+        <tr>
+            <th>email</th>
+            <td> <%= @user.email %></td>
+        </tr>
+        <tr>
+            <th>郵便番号</th>
+            <td> <%= @user.postal_code %></td>
+        </tr>
+        <tr>
+            <th>住所</th>
+            <td> <%= @user.address %></td>
+        </tr>
+        <tr>
+            <th>自己紹介</th>
+            <td> <%= @user.bio %></td>
+        </tr>
+</table>
+
+<%= link_to t('views.common.edit', name: User.model_name.human.downcase), edit_user_path(@user) %> |
+

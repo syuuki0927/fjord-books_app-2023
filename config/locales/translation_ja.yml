@@ -9,3 +9,6 @@ ja:
         memo: メモ
         picture: 画像
         title: タイトル
+  users:
+    index:
+      users: "ユーザー一覧"

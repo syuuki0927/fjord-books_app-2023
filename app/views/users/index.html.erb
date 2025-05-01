@@ -1,12 +1,12 @@
-<h1>Users</h1>
+<h1><%= t('.users') %> </h1>
 
 <table class="table_design">
   <thead>
     <tr>
-      <th>email</th>
-      <th>郵便番号</th>
-      <th>住所</th>
-      <th>自己紹介</th>
+      <th><%= User.human_attribute_name("email") %></th>
+      <th><%= User.human_attribute_name("postal_code") %></th>
+      <th><%= User.human_attribute_name("address") %></th>
+      <th><%= User.human_attribute_name("bio") %></th>
     <tr>
   </thead>
   <tbody>

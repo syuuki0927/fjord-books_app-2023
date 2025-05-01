@@ -1,19 +1,19 @@
 <table class="table_design_horizontal">
     <tbody>
         <tr>
-            <th>email</th>
+            <th><%= User.human_attribute_name("email") %></th>
             <td> <%= @user.email %></td>
         </tr>
         <tr>
-            <th>郵便番号</th>
+            <th><%= User.human_attribute_name("postal_code") %></th>
             <td> <%= @user.postal_code %></td>
         </tr>
         <tr>
-            <th>住所</th>
+            <th><%= User.human_attribute_name("address") %></th>
             <td> <%= @user.address %></td>
         </tr>
         <tr>
-            <th>自己紹介</th>
+            <th><%= User.human_attribute_name("bio") %></th>
             <td> <%= @user.bio %></td>
         </tr>
 </table>

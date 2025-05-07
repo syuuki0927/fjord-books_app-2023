@@ -17,6 +17,11 @@
   </div>
 
   <div>
+    <%= form.hidden_field :commentable_id, value: comment.commentable_id %>
+    <%= form.hidden_field :commentable_type, value: comment.commentable_type %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

@@ -10,3 +10,14 @@
     <%= button_to "Destroy this report", @report, method: :delete %>
   <% end %>
 </div>
+
+<div>
+  <% @report.comment.each do |comment| %>
+    <div class="index-item">
+      <%= render comment %>
+    </div>
+  <% end %>
+
+  <%= render "comments/form", comment: @report.comment.create(user: current_user) %>
+
+</div>

@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_24_052328) do
     t.datetime "updated_at", null: false
     t.string "postal_code"
     t.string "address"
-    t.string "bio"
+    t.text "bio"
     t.index ["address"], name: "index_users_on_address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["postal_code"], name: "index_users_on_postal_code"

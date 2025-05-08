@@ -37,7 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
 
       t.string :postal_code
       t.string :address
-      t.string :bio
+      t.text :bio
     end
 
     add_index :users, :email,                unique: true

@@ -6,10 +6,7 @@ class UsersController < ApplicationController
     @users = User.order(:emal).page(params[:page])
   end
 
-  def show
-    @current_user = current_user
-    @self_user = (current_user == @user)
-  end
+  def show; end
 
   def set_user
     @user = User.find(params[:id])

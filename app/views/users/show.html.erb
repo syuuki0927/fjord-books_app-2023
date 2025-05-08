@@ -17,6 +17,6 @@
             <td> <%= @user.bio %></td>
         </tr>
 </table>
-<% if @self_user %>
+<% if @user == current_user %>
     <%= link_to t('views.common.edit', name: User.model_name.human.downcase), edit_user_registration_path, class: "navbar-link" %>
 <% end %>

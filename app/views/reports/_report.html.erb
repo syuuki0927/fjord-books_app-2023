@@ -1,17 +1,20 @@
 <div id="<%= dom_id report %>">
-  <p>
-    <strong>Title:</strong>
+    <%= link_to([report.user.name, report.user.email].find(&:present?), report.user) %>
+  <h1 style="display: flex; align-items: center; margin-top: 0.5rem">
+    <% if report.user.avatar.attached? %>
+      <div class="avatar">
+        <%= image_tag report.user.avatar.variant(:icon_inline)%>
+      </div>
+    <% end %>
     <%= report.title %>
-  </p>
+  </h1>
+  <div style="width: 100%; text-align: right;">
+    <span class="span-small">
+      <%= report.created_at %>
+    </span>
+  </div>
 
   <p>
-    <strong>Content:</strong>
     <%= report.content %>
   </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= [report.user.name, report.user.email].find(&:present?) %>
-  </p>
-
 </div>

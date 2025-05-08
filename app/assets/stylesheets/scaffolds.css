@@ -221,6 +221,40 @@ Index
 }
 
 /****************
+Comments
+****************/
+.comments {
+  margin-top: 10px;
+  display: grid;
+  grid-row-gap: 10px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10pt;
+  align-items: center;
+}
+
+.comment-user {
+  display: flex;
+  align-items: center;
+}
+
+.comment-user img {
+  display: inline;
+  margin-right: 10pt;
+}
+
+.span-small {
+  font-size: 0.8rem;
+}
+
+.avatar img {
+  display: inline;
+  margin-right: 10pt;
+}
+/****************
 Show
 ****************/
 

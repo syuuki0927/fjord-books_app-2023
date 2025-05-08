@@ -10,11 +10,15 @@
   <% end %>
 </div>
 
-<div>
-  <% @report.comment.each do |comment| %>
-    <div class="index-item">
-      <%= render comment %>
-    </div>
+<div id="comments" class="comments">
+  <% if @report.comment.length > 0 %>
+    <% @report.comment.each do |comment| %>
+      <div class="index-item">
+        <%= render comment %>
+      </div>
+    <% end %>
+  <% else %>
+    コメントはまだありません
   <% end %>
 
   <%= render "comments/form", comment: @report.comment.new(commentable: @report) %>

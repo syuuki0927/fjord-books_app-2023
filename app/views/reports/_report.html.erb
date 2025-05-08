@@ -3,14 +3,14 @@
   <h1 style="display: flex; align-items: center; margin-top: 0.5rem">
     <% if report.user.avatar.attached? %>
       <div class="avatar">
-        <%= image_tag report.user.avatar.variant(:icon_inline)%>
+        <%= image_tag report.user.avatar.variant(:icon_inline) %>
       </div>
     <% end %>
     <%= report.title %>
   </h1>
   <div style="width: 100%; text-align: right;">
     <span class="span-small">
-      <%= report.created_at %>
+        <%= l report.created_at, format: :long %>
     </span>
   </div>
 

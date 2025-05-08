@@ -19,7 +19,7 @@
       </div>
     <% end %>
   <% else %>
-    コメントはまだありません
+    <%= t('views.common.no_comments') %>
   <% end %>
   <%= render "comments/form", comment: @book.comment.new(commentable: @book) %>
 </div>

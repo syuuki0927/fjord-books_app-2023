@@ -7,7 +7,7 @@
         <%= link_to([comment.user.name, comment.user.email].find(&:present?), comment.user) %>
       </div>
       <span class="span-small">
-        <%= comment.created_at %>
+        <%= l comment.created_at, format: :long %>
       </span>
     </div>
   <p>
@@ -16,8 +16,8 @@
 
   <% if comment.user == current_user %>
     <div style="width: 100%; text-align: right;">
-      <%= link_to "Edit this comment", edit_comment_path(comment) %>
-      <%= button_to "Destroy this rcomment", comment, method: :delete%>
+      <%= link_to t('views.common.edit', name: Comment.model_name.human), edit_comment_path(comment) %>
+      <%= button_to t('views.common.destroy', name: Comment.model_name.human), comment, method: :delete %>
     </div>
   <% end %>
 </div>

@@ -16,3 +16,11 @@
     <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete %>
   <% end %>
 </nav>
+
+<% if @report.mentioned_reports.length > 0 %>
+  <h3><%= t '.mentioned' %> </h3><br>
+
+  <% @report.mentioned_reports.map do |report| %>
+    <%= link_to report.title, report %>
+  <% end %>
+<% end %>

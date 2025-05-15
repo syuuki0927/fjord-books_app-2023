@@ -221,3 +221,6 @@ ja:
     registrations:
       edit:
         title: "アカウント編集"
+  reports:
+    show:
+      mentioned: この記事は以下の記事からリンクされています。

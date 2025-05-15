@@ -1,0 +1,19 @@
+<h1><%= t('.users') %> </h1>
+
+<table class="table_design">
+  <thead>
+    <tr>
+      <th><%= User.human_attribute_name("email") %></th>
+      <th><%= User.human_attribute_name("postal_code") %></th>
+      <th><%= User.human_attribute_name("address") %></th>
+      <th><%= User.human_attribute_name("bio") %></th>
+    <tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <%= render user %>
+      </tr>
+    <% end %>
+  <tbody>
+</table>

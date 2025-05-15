@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        postal_code: 郵便番号
+        address: 住所
+        bio: 自己紹介
+    models:
+      user:
+        one: ユーザー
+        other: ユーザー
+  devise:
+    registrations:
+      edit:
+        edit_user: アカウント編集
+        back: 戻る
+    shared:
+      links:
+        edit_profile: アカウントを編集
+        sign_out: ログアウト
+      minimum_password_length:
+        one: "（%{count}字以上）"
+      signed_in_with_email: "%{email}でログイン中"
+  errors:
+    messages:
+      not_saved:
+        one: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"

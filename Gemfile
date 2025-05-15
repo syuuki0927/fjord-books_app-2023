@@ -56,6 +56,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'letter_opener_web', '~> 3.0'
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 
@@ -83,3 +84,6 @@ end
 
 gem 'carrierwave'
 gem 'kaminari'
+
+gem 'devise', '~> 4.9'
+gem 'devise-i18n'

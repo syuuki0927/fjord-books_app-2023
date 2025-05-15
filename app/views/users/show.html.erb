@@ -1,0 +1,22 @@
+<table class="table_design_horizontal">
+    <tbody>
+        <tr>
+            <th><%= User.human_attribute_name("email") %></th>
+            <td> <%= @user.email %></td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name("postal_code") %></th>
+            <td> <%= @user.postal_code %></td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name("address") %></th>
+            <td> <%= @user.address %></td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name("bio") %></th>
+            <td> <%= @user.bio %></td>
+        </tr>
+</table>
+<% if @user == current_user %>
+    <%= link_to t('views.common.edit', name: User.model_name.human.downcase), edit_user_registration_path, class: "navbar-link" %>
+<% end %>

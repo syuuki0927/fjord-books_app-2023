@@ -208,6 +208,7 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+      notice_unable_destroy: "この%{name}は削除できません。"
   layouts:
     application:
       menu: メニュー

@@ -21,6 +21,6 @@
   <h3><%= t '.mentioned' %> </h3><br>
 
   <% @report.mentioned_reports.map do |report| %>
-    <%= link_to report.title, report %>
+    <div><%= link_to report.title, report %></div>
   <% end %>
 <% end %>

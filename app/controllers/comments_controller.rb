@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     redirect_to @comment.commentable if @comment.user != current_user
   end
 
-  # POST /comments or /comments.json
+  # POST /comments
   def create
     @comment = Comment.new(comment_params.merge(user_id: current_user.id))
 
@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /comments/1 or /comments/1.json
+  # PATCH/PUT /comments/1
   def update
     @comment = Comment.find(params[:id])
     if @comment.user == current_user && @comment.update(comment_params)
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1 or /comments/1.json
+  # DELETE /comments/1
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy

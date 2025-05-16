@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
-  # GET /reports or /reports.json
+  # GET /reports
   def index
     @reports = Report.all
   end
 
-  # GET /reports/1 or /reports/1.json
+  # GET /reports/1
   def show
     @report = Report.find(params[:id])
   end
@@ -23,7 +23,7 @@ class ReportsController < ApplicationController
     redirect_to report_url(@report) if @report.user != current_user
   end
 
-  # POST /reports or /reports.json
+  # POST /reports
   def create
     @report = Report.new(report_params.merge(user_id: current_user.id))
 
@@ -34,7 +34,7 @@ class ReportsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /reports/1 or /reports/1.json
+  # PATCH/PUT /reports/1
   def update
     @report = Report.find(params[:id])
     if @report.user == current_user && @report.update(report_params)
@@ -44,7 +44,7 @@ class ReportsController < ApplicationController
     end
   end
 
-  # DELETE /reports/1 or /reports/1.json
+  # DELETE /reports/1
   def destroy
     @report = Report.find(params[:id])
 

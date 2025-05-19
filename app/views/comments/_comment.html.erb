@@ -1,0 +1,23 @@
+<div id="<%= dom_id comment %>">
+    <div class="comment-header">
+      <div class="comment-user">
+        <% if comment.user.avatar.attached? %>
+          <%= image_tag comment.user.avatar.variant(:icon_inline) %>
+        <% end %>
+        <%= link_to([comment.user.name, comment.user.email].find(&:present?), comment.user) %>
+      </div>
+      <span class="span-small">
+        <%= l comment.created_at, format: :long %>
+      </span>
+    </div>
+  <p>
+    <%= comment.body %>
+  </p>
+
+  <% if comment.user == current_user %>
+    <div style="width: 100%; text-align: right;">
+      <%= link_to t('views.common.edit', name: Comment.model_name.human), edit_comment_path(comment) %>
+      <%= button_to t('views.common.destroy', name: Comment.model_name.human), comment, method: :delete %>
+    </div>
+  <% end %>
+</div>

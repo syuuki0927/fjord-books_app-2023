@@ -1,0 +1,20 @@
+<div id="<%= dom_id report %>">
+    <%= link_to([report.user.name, report.user.email].find(&:present?), report.user) %>
+  <h1 style="display: flex; align-items: center; margin-top: 0.5rem">
+    <% if report.user.avatar.attached? %>
+      <div class="avatar">
+        <%= image_tag report.user.avatar.variant(:icon_inline) %>
+      </div>
+    <% end %>
+    <%= report.title %>
+  </h1>
+  <div style="width: 100%; text-align: right;">
+    <span class="span-small">
+        <%= l report.created_at, format: :long %>
+    </span>
+  </div>
+
+  <p>
+    <%= report.content %>
+  </p>
+</div>

@@ -196,6 +196,7 @@ ja:
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
       title_show: "%{name}の詳細"
       sign_out: ログアウト
+      no_comments: コメントはまだありません
     pagination:
       first: '« 最初'
       last: '最後 »'
@@ -207,6 +208,7 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+      notice_unable_destroy: "この%{name}は削除できません。"
   layouts:
     application:
       menu: メニュー
@@ -216,3 +218,8 @@ ja:
     registrations:
       edit:
         title: "アカウント編集"
+  comments:
+    edit:
+      back: "%{name}に戻る"
+    form:
+      comment_submit: "投稿"

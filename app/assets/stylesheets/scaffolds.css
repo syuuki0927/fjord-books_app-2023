@@ -260,6 +260,13 @@ Show
   object-fit: contain;
 }
 
+.mentions {
+  border: 2px solid;
+  border-radius: 20px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
 /****************
 New and Edit
 ****************/

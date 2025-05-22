@@ -24,7 +24,7 @@ class Report < ApplicationRecord
   def save_with_mentions
     result = false
     transaction do
-      result = save && update_mentions
+      result = save! && update_mentions!
     end
 
     result
@@ -33,7 +33,7 @@ class Report < ApplicationRecord
   def update_with_mentions(params)
     result = false
     transaction do
-      result = update(params) && update_mentions
+      result = update!(params) && update_mentions!
     end
 
     result
@@ -59,7 +59,7 @@ class Report < ApplicationRecord
     end
   end
 
-  def update_mentions
+  def update_mentions!
     mentioning_ids = scan_mentioning_ids.map(&:to_i)
 
     mentioning_ids.uniq!
@@ -69,12 +69,12 @@ class Report < ApplicationRecord
 
     new_mentioning_ids.each do |mentioning_id|
       mention = Mention.new(report_from: self, report_to: Report.find(mentioning_id))
-      return false unless mention.save
+      return false unless mention.save!
     end
 
     deleted_mentioning_ids.each do |deleted_mentioning_id|
       deleted_mention = Mention.find_by(report_from: self, report_to: Report.find(deleted_mentioning_id))
-      return false unless deleted_mention.destroy
+      return false unless deleted_mention.destroy!
     end
 
     true

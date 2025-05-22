@@ -41,31 +41,12 @@ class Report < ApplicationRecord
 
   private
 
-  def scan_mentioning_ids
-    mentioning_ids = content.scan(%r{http://localhost:3000/reports/(\d+)})
-
-    mentioning_ids.flatten
-  end
-
-  def get_new_mentions(mentioning_ids, already_mentioning_ids)
-    mentioning_ids.filter do |mentioning_id|
-      !already_mentioning_ids.include?(mentioning_id)
-    end
-  end
-
-  def get_deleted_mentions(mentioning_ids, already_mentioning_ids)
-    already_mentioning_ids.filter do |already_mentioning_id|
-      !mentioning_ids.include?(already_mentioning_id)
-    end
-  end
-
   def update_mentions!
-    mentioning_ids = scan_mentioning_ids.map(&:to_i)
+    mentioning_ids = content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.map(&:to_i).uniq
 
-    mentioning_ids.uniq!
     already_mentioning_ids = mentioning_reports.map(&:id)
-    new_mentioning_ids = get_new_mentions(mentioning_ids, already_mentioning_ids)
-    deleted_mentioning_ids = get_deleted_mentions(mentioning_ids, already_mentioning_ids)
+    new_mentioning_ids = mentioning_ids - already_mentioning_ids
+    deleted_mentioning_ids = already_mentioning_ids - mentioning_ids
 
     new_mentioning_ids.each do |mentioning_id|
       mention = Mention.new(report_from: self, report_to: Report.find(mentioning_id))

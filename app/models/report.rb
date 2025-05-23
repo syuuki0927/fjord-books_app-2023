@@ -22,21 +22,25 @@ class Report < ApplicationRecord
   end
 
   def save_with_mentions
-    result = false
     transaction do
-      result = save! && update_mentions!
-    end
+      save!
+      update_mentions!
 
-    result
+      true
+    end
+  rescue ActiveRecord::RecordInvalid
+    false
   end
 
   def update_with_mentions(params)
-    result = false
     transaction do
-      result = update!(params) && update_mentions!
-    end
+      update!(params)
+      update_mentions!
 
-    result
+      true
+    end
+  rescue ActiveRecord::RecordInvalid
+    false
   end
 
   private
@@ -49,13 +53,12 @@ class Report < ApplicationRecord
     deleted_mentioning_ids = already_mentioning_ids - mentioning_ids
 
     new_mentioning_ids.each do |mentioning_id|
-      mention = Mention.new(report_from: self, report_to: Report.find(mentioning_id))
-      return false unless mention.save!
+      new_mentioning_report = Report.find_by(id: mentioning_id)
+      mentioning_reports << new_mentioning_report unless new_mentioning_report.nil?
     end
 
     deleted_mentioning_ids.each do |deleted_mentioning_id|
-      deleted_mention = Mention.find_by(report_from: self, report_to: Report.find(deleted_mentioning_id))
-      return false unless deleted_mention.destroy!
+      mentioning.find_by(report_to_id: deleted_mentioning_id).destroy!
     end
 
     true

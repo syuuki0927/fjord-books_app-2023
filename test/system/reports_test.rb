@@ -4,7 +4,7 @@ require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
   setup do
-    @report = reports(:report)
+    @report = reports(:report_by_alice)
     @alice = users(:alice)
 
     @new_title = '新しい日報'

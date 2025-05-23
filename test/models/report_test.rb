@@ -4,7 +4,7 @@ require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
   setup do
-    @report = reports(:report)
+    @report = reports(:report_by_alice)
   end
 
   test 'correct_user_editable' do
@@ -13,7 +13,7 @@ class ReportTest < ActiveSupport::TestCase
   end
 
   test 'incorrect_user_unable_edit' do
-    user = users(:two)
+    user = users(:bob)
     assert_not @report.editable?(user)
   end
 

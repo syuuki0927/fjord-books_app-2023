@@ -1,17 +1,17 @@
-report:
+report_by_alice:
   user: alice
   title: Railsのテストを実施
   content: Railsのテストについて学習し、プラクティスに取り組んだ。
   created_at: 2025/05/16 9:32:26
 
-id_1_report:
-  user: one
-  title: one title
-  content: one content
+report_id_1:
+  user: bob
+  title: bobの日報
+  content: 私はBobです。これから日報を書いていきます。
   id: 1
 
-id_2_report:
-  user: two
-  title: two title
-  content: two content
+report_id_2:
+  user: carol
+  title: carolの日報
+  content: 私はCarolです。私もこれから日報を書きます。
   id: 2

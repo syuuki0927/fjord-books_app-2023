@@ -1,7 +1,7 @@
-one:
-  title: MyString
-  memo: MyText
+cherry:
+  title: プロを目指す人のためのRuby入門
+  memo: チェリー本
 
-two:
-  title: MyString
-  memo: MyText
+textbook:
+  title: Railsの教科書
+  memo: PDFのテキストブック

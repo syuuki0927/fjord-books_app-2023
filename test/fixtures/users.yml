@@ -3,8 +3,14 @@ alice:
   name: alice
   encrypted_password: <%= Devise::Encryptor.digest(User, 'anzenpas_ruby_plactice2323') %>
 
-one:
-  email: hoge@example.com
+bob:
+  email: bob@example.com
+  name: bob
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'anzenpas_ruby_plactice2323') %>
 
-two:
-  email: hoge2@example.com
+
+carol:
+  email: carol@example.com
+  name: carol
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'anzenpas_ruby_plactice2323') %>
+

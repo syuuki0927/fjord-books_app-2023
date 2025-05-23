@@ -17,7 +17,6 @@ class BooksTest < ApplicationSystemTestCase
   test 'visiting the index' do
     visit books_url
 
-    # visit books_url
     assert_selector 'h1', text: '本の一覧'
   end
 

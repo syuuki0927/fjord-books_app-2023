@@ -21,33 +21,48 @@ class BooksTest < ApplicationSystemTestCase
   end
 
   test 'should create book' do
+    new_title = '新しいタイトル'
+    new_memo = '新しいメモ'
     visit books_url
     click_on '本の新規作成'
+    assert_nil Book.find_by(title: new_title, memo: new_memo)
 
-    fill_in 'メモ', with: @book.memo
-    fill_in 'タイトル', with: @book.title
-    click_on '登録する'
+    fill_form(new_title, new_memo, '登録する')
 
     assert_text '本が作成されました。'
+    assert_not_nil Book.find_by(title: new_title, memo: new_memo)
     click_on '本の一覧に戻る'
   end
 
   test 'should update Book' do
+    editted_title = '編集後のタイトル'
+    editted_memo = '編集後のメモ'
+
     visit book_url(@book)
     click_on 'この本を編集', match: :first
+    assert_nil Book.find_by(title: editted_title, memo: editted_memo)
 
-    fill_in 'メモ', with: @book.memo
-    fill_in 'タイトル', with: @book.title
-    click_on '更新'
+    fill_form(editted_title, editted_memo, '更新')
 
     assert_text '本が更新されました。'
+    assert_not_nil Book.find_by(title: editted_title, memo: editted_memo)
     click_on '本の一覧に戻る'
   end
 
   test 'should destroy Book' do
     visit book_url(@book)
     click_on 'この本を削除', match: :first
+    assert_not_nil Book.find(@book.id)
 
     assert_text '本が削除されました。'
+    assert_raises(ActiveRecord::RecordNotFound) do
+      Book.find(@book.id)
+    end
+  end
+
+  def fill_form(title, memo, button)
+    fill_in 'タイトル', with: title
+    fill_in 'メモ', with: memo
+    click_on button
   end
 end

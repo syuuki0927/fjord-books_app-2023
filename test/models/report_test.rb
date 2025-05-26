@@ -21,16 +21,21 @@ class ReportTest < ActiveSupport::TestCase
     assert_equal(Date.new(2025, 5, 16), @report.created_on)
   end
 
-  test 'send_mentions' do
+  test 'save_mentions' do
     assert_equal(@report.mentioning_reports, [])
 
     @report.content = 'http://localhost:3000/reports/1'
 
-    @report.send(:save_mentions)
+    @report.save
     assert_equal(@report.mentioning_reports, [Report.find(1)])
 
-    @report.content = 'http://localhost:3000/reports/1\nhttp://localhost:3000/reports/1\nhttp://localhost:3000/reports/2'
-    @report.send(:save_mentions)
+    @report.content = <<-TEXT
+    http://localhost:3000/reports/1
+    http://localhost:3000/reports/1
+    http://localhost:3000/reports/2
+    TEXT
+
+    @report.save
     assert_equal(@report.mentioning_reports, [Report.find(1), Report.find(2)])
   end
 end

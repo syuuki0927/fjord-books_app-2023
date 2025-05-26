@@ -43,27 +43,26 @@ class ReportsTest < ApplicationSystemTestCase
   end
 
   test 'should update Report' do
-    new_title = '新しい日報'
-    new_content = '新しい内容'
+    editted_title = '新しい日報'
+    editted_content = '新しい内容'
 
-    new_report = Report.find_by(title: new_title)
-    assert_not_equal new_title, new_report
-    assert_not_equal new_content, new_report
-    assert_no_text new_title
-    assert_no_text new_content
+    editted_report = Report.find_by(title: editted_title)
+    assert_nil editted_report
+    assert_no_text editted_title
+    assert_no_text editted_content
 
     visit report_url(@report)
     click_on '日報を編集', match: :first
 
-    fill_form(new_title, new_content, '更新')
+    fill_form(editted_title, editted_content, '更新')
 
     assert_text '日報が更新されました'
     visit report_url(@report)
-    new_report = Report.find_by(title: new_title)
-    assert_equal new_title, new_report.title
-    assert_equal new_content, new_report.content
-    assert_text new_title
-    assert_text new_content
+    editted_report = Report.find(@report.id)
+    assert_equal editted_title, editted_report.title
+    assert_equal editted_content, editted_report.content
+    assert_text editted_title
+    assert_text editted_content
   end
 
   test 'should destroy Report' do

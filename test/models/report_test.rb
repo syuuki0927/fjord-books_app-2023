@@ -28,7 +28,7 @@ class ReportTest < ActiveSupport::TestCase
     @report.content = 'http://localhost:3000/reports/1'
 
     @report.save
-    assert_equal([Report.find(1)], @report.mentioning_reports)
+    assert_equal([reports(:report_id1)], @report.mentioning_reports)
 
     @report.content = <<-TEXT
     http://localhost:3000/reports/1
@@ -37,6 +37,6 @@ class ReportTest < ActiveSupport::TestCase
     TEXT
 
     @report.save
-    assert_equal([Report.find(1), Report.find(2)], @report.mentioning_reports)
+    assert_equal([reports(:report_id1), reports(:report_id2)], @report.mentioning_reports)
   end
 end

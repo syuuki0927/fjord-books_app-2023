@@ -6,7 +6,7 @@
 
 <%= render 'shared/comments', commentable: @report %>
 
-<% if @report.mentioned_reports.length > 0 %>
+<% if @report.mentioned_reports.exists? %>
   <div class="mentions">
     <h3><%= t '.mentioned' %> </h3><br>
 

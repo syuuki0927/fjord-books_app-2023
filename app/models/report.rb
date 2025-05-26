@@ -22,25 +22,23 @@ class Report < ApplicationRecord
   end
 
   def save_with_mentions
+    success = false
     transaction do
-      save!
-      update_mentions!
-
-      true
+      success = save! && update_mentions!
+      raise ActiveRecord::Rollback unless success
     end
-  rescue ActiveRecord::RecordInvalid
-    false
+
+    success
   end
 
   def update_with_mentions(params)
+    success = false
     transaction do
-      update!(params)
-      update_mentions!
-
-      true
+      success = update!(params) && update_mentions!
+      raise ActiveRecord::Rollback unless success
     end
-  rescue ActiveRecord::RecordInvalid
-    false
+
+    success
   end
 
   private
@@ -48,13 +46,13 @@ class Report < ApplicationRecord
   def update_mentions!
     mentioning_ids = content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.map(&:to_i).uniq
 
-    already_mentioning_ids = mentioning_reports.map(&:id)
+    already_mentioning_ids = mentioning_report_ids
     new_mentioning_ids = mentioning_ids - already_mentioning_ids
     deleted_mentioning_ids = already_mentioning_ids - mentioning_ids
 
     new_mentioning_ids.each do |mentioning_id|
       new_mentioning_report = Report.find_by(id: mentioning_id)
-      mentioning_reports << new_mentioning_report unless new_mentioning_report.nil?
+      mentioning_reports << new_mentioning_report if new_mentioning_report.present?
     end
 
     deleted_mentioning_ids.each do |deleted_mentioning_id|

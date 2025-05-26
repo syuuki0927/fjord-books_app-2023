@@ -146,31 +146,18 @@ class ReportsTest < ApplicationSystemTestCase
   end
 
   test 'should delete mention when Report deleted' do
-    new_title = '新しい日報'
-    new_content = 'http://localhost:3000/reports/1が参考になると思います。'
-
     report1 = reports(:report_id1)
+    mentioning_report = reports(:report_mentioning_to1)
+
+    assert_equal [report1], mentioning_report.mentioning_reports
 
     visit report_url(report1)
-    assert_no_text new_title
+    assert_text '参考になった日報'
 
-    visit reports_url
-    click_on '日報の新規作成'
-
-    fill_form(new_title, new_content, '登録する')
-
-    assert_text '日報が作成されました'
-    click_on '戻る'
-    new_report = Report.find_by(title: new_title)
-    assert_equal [report1], new_report.mentioning_reports
-
-    visit report_url(report1)
-    assert_text new_title
-
-    visit report_url(new_report)
+    visit report_url(mentioning_report)
     click_on 'この日報を削除', match: :first
     visit report_url(report1)
-    assert_no_text new_title
+    assert_no_text '参考になった日報'
   end
 
   def fill_form(title, content, button)

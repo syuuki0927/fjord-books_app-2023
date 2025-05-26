@@ -4,17 +4,18 @@ require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
   setup do
+    @report_by_alice = reports(:report_by_alice)
     @report = reports(:report_by_alice)
   end
 
   test 'correct_user_editable' do
-    user = users(:alice)
-    assert @report.editable?(user)
+    alice = users(:alice)
+    assert @report_by_alice.editable?(alice)
   end
 
   test 'incorrect_user_unable_edit' do
-    user = users(:bob)
-    assert_not @report.editable?(user)
+    bob = users(:bob)
+    assert_not @report_by_alice.editable?(bob)
   end
 
   test 'created_on' do
@@ -22,12 +23,12 @@ class ReportTest < ActiveSupport::TestCase
   end
 
   test 'save_mentions' do
-    assert_equal(@report.mentioning_reports, [])
+    assert_equal([], @report.mentioning_reports)
 
     @report.content = 'http://localhost:3000/reports/1'
 
     @report.save
-    assert_equal(@report.mentioning_reports, [Report.find(1)])
+    assert_equal([Report.find(1)], @report.mentioning_reports)
 
     @report.content = <<-TEXT
     http://localhost:3000/reports/1
@@ -36,6 +37,6 @@ class ReportTest < ActiveSupport::TestCase
     TEXT
 
     @report.save
-    assert_equal(@report.mentioning_reports, [Report.find(1), Report.find(2)])
+    assert_equal([Report.find(1), Report.find(2)], @report.mentioning_reports)
   end
 end

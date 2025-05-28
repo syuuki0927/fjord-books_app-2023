@@ -47,16 +47,15 @@ class ReportsTest < ApplicationSystemTestCase
     edited_content = '新しい内容'
 
     visit report_url(@report)
-    edited_report = Report.find_by(title: edited_title, content: edited_content)
-    assert_nil edited_report
+    assert_not_equal edited_title, @report.title
+    assert_not_equal edited_content, @report.content
     assert_no_text edited_title
     assert_no_text edited_content
 
     click_on '日報を編集', match: :first
-
     fill_form(edited_title, edited_content, '更新')
-
     assert_text '日報が更新されました'
+
     edited_report = Report.find(@report.id)
     assert_equal edited_title, edited_report.title
     assert_equal edited_content, edited_report.content

@@ -39,14 +39,20 @@ class BooksTest < ApplicationSystemTestCase
     edited_memo = '編集後のメモ'
 
     visit book_url(@book)
+    assert_not_equal edited_title, @book.title
+    assert_not_equal edited_memo, @book.memo
+    assert_no_text edited_title
+    assert_no_text edited_memo
+
     click_on 'この本を編集', match: :first
-    assert_nil Book.find_by(title: edited_title, memo: edited_memo)
-
     fill_form(edited_title, edited_memo, '更新')
-
     assert_text '本が更新されました。'
-    assert_not_nil Book.find_by(title: edited_title, memo: edited_memo)
-    click_on '本の一覧に戻る'
+
+    edited_book = Book.find(@book.id)
+    assert_equal edited_title, edited_book.title
+    assert_equal edited_memo, edited_book.memo
+    assert_text edited_title
+    assert_text edited_memo
   end
 
   test 'should destroy Book' do

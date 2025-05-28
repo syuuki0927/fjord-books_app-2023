@@ -4,18 +4,17 @@ require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
   setup do
-    @report_by_alice = reports(:report_by_alice)
     @report = reports(:report_by_alice)
   end
 
   test 'correct_user_editable' do
     alice = users(:alice)
-    assert @report_by_alice.editable?(alice)
+    assert @report.editable?(alice)
   end
 
   test 'incorrect_user_unable_edit' do
     bob = users(:bob)
-    assert_not @report_by_alice.editable?(bob)
+    assert_not @report.editable?(bob)
   end
 
   test 'created_on' do

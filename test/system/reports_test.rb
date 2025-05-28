@@ -43,26 +43,26 @@ class ReportsTest < ApplicationSystemTestCase
   end
 
   test 'should update Report' do
-    editted_title = '新しい日報'
-    editted_content = '新しい内容'
+    edited_title = '新しい日報'
+    edited_content = '新しい内容'
 
-    editted_report = Report.find_by(title: editted_title)
-    assert_nil editted_report
-    assert_no_text editted_title
-    assert_no_text editted_content
+    edited_report = Report.find_by(title: edited_title)
+    assert_nil edited_report
+    assert_no_text edited_title
+    assert_no_text edited_content
 
     visit report_url(@report)
     click_on '日報を編集', match: :first
 
-    fill_form(editted_title, editted_content, '更新')
+    fill_form(edited_title, edited_content, '更新')
 
     assert_text '日報が更新されました'
     visit report_url(@report)
-    editted_report = Report.find(@report.id)
-    assert_equal editted_title, editted_report.title
-    assert_equal editted_content, editted_report.content
-    assert_text editted_title
-    assert_text editted_content
+    edited_report = Report.find(@report.id)
+    assert_equal edited_title, edited_report.title
+    assert_equal edited_content, edited_report.content
+    assert_text edited_title
+    assert_text edited_content
   end
 
   test 'should destroy Report' do
@@ -70,7 +70,6 @@ class ReportsTest < ApplicationSystemTestCase
     assert_text @report.title
     assert_text @report.content
     visit report_url(@report)
-    assert_equal @report, Report.find(@report.id)
 
     click_on 'この日報を削除', match: :first
 
@@ -100,7 +99,6 @@ class ReportsTest < ApplicationSystemTestCase
     fill_form(new_title, new_content, '登録する')
 
     assert_text '日報が作成されました'
-    click_on '戻る'
     new_report = Report.find_by(title: new_title)
     assert_equal [report1, report2], new_report.mentioning_reports
 

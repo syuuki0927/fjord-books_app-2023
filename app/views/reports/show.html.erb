@@ -10,7 +10,7 @@
   <div class="mentions">
     <h3><%= t '.mentioned' %> </h3><br>
 
-    <% @report.mentioned_reports.order(created_at: :desc, id: :desc).map do |report| %>
+    <% @report.mentioned_reports.order(created_at: :desc, id: :desc).each do |report| %>
       <div><%= link_to report.title, report %></div>
     <% end %>
   </div>

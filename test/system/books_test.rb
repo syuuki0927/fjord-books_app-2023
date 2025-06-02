@@ -4,42 +4,69 @@ require 'application_system_test_case'
 
 class BooksTest < ApplicationSystemTestCase
   setup do
-    @book = books(:one)
+    @book = books(:cherry)
+    @alice = users(:alice)
+
+    visit root_url
+    fill_in 'Eメール', with: @alice.email
+    fill_in 'パスワード', with: 'anzenpas_ruby_plactice2323'
+    click_button 'ログイン'
+    assert_text 'ログインしました。', wait: 5
   end
 
   test 'visiting the index' do
     visit books_url
-    assert_selector 'h1', text: 'Books'
+
+    assert_selector 'h1', text: '本の一覧'
   end
 
   test 'should create book' do
+    new_title = '新しいタイトル'
+    new_memo = '新しいメモ'
     visit books_url
-    click_on 'New book'
+    click_on '本の新規作成'
+    assert_nil Book.find_by(title: new_title, memo: new_memo)
 
-    fill_in 'Memo', with: @book.memo
-    fill_in 'Title', with: @book.title
-    click_on 'Create Book'
+    fill_form(new_title, new_memo, '登録する')
 
-    assert_text 'Book was successfully created'
-    click_on 'Back'
+    assert_text '本が作成されました。'
+    assert_not_nil Book.find_by(title: new_title, memo: new_memo)
+    click_on '本の一覧に戻る'
   end
 
   test 'should update Book' do
+    edited_title = '編集後のタイトル'
+    edited_memo = '編集後のメモ'
+
     visit book_url(@book)
-    click_on 'Edit this book', match: :first
+    assert_not_equal edited_title, @book.title
+    assert_not_equal edited_memo, @book.memo
+    assert_no_text edited_title
+    assert_no_text edited_memo
 
-    fill_in 'Memo', with: @book.memo
-    fill_in 'Title', with: @book.title
-    click_on 'Update Book'
+    click_on 'この本を編集', match: :first
+    fill_form(edited_title, edited_memo, '更新')
+    assert_text '本が更新されました。'
 
-    assert_text 'Book was successfully updated'
-    click_on 'Back'
+    edited_book = Book.find(@book.id)
+    assert_equal edited_title, edited_book.title
+    assert_equal edited_memo, edited_book.memo
+    assert_text edited_title
+    assert_text edited_memo
   end
 
   test 'should destroy Book' do
     visit book_url(@book)
-    click_on 'Destroy this book', match: :first
+    click_on 'この本を削除', match: :first
+    assert_not_nil Book.find(@book.id)
 
-    assert_text 'Book was successfully destroyed'
+    assert_text '本が削除されました。'
+    assert_raises(ActiveRecord::RecordNotFound) { Book.find(@book.id) }
+  end
+
+  def fill_form(title, memo, button)
+    fill_in 'タイトル', with: title
+    fill_in 'メモ', with: memo
+    click_on button
   end
 end

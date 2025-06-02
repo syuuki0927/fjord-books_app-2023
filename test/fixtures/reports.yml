@@ -1,11 +1,23 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+report_by_alice:
+  user: alice
+  title: Railsのテストを実施
+  content: Railsのテストについて学習し、プラクティスに取り組んだ。
+  created_at: 2025/05/16 9:32:26
 
-one:
-  user: one
-  title: MyString
-  content: MyText
+report_id1:
+  user: bob
+  title: bobの日報
+  content: 私はBobです。これから日報を書いていきます。
+  id: 1
 
-two:
-  user: two
-  title: MyString
-  content: MyText
+report_id2:
+  user: carol
+  title: carolの日報
+  content: 私はCarolです。私もこれから日報を書きます。
+  id: 2
+
+report_mentioning_to1:
+  user: alice
+  title: 参考になった日報
+  content: http://localhost:3000/reports/1が参考になりました。
+  id: 3
